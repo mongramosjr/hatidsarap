@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  django:
+    build:
+      context: ./delivery_app
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./delivery_app:/app
+    environment:
+      - DEBUG=1
+
+  react-native:
+    build:
+      context: ./mobile_app_react
+      dockerfile: Dockerfile
+    ports:
+      - "19000:19000"  # Metro Bundler port
+      - "19001:19001"  # Expo Web port (if using Expo)
+      - "19002:19002"
+    volumes:
+      - ./mobile_app_react:/app
